@@ -1,0 +1,1035 @@
+//Alan Birmaher
+//COP 4331C
+//Homework 2
+//10/13/14
+
+//Import Libraries
+import java.util.*;
+import java.io.*;
+
+//studentSort Class 
+public class studentSort {
+	
+	//Earliest registration dates function
+	public static ArrayList<String> datesEarliest(ArrayList<Student> list, String className){
+		
+		//Setup array for returning
+		ArrayList<String> toPrint= new ArrayList<String>();
+		ArrayList<Integer> dateInt= new ArrayList<Integer>();
+		ArrayList<Student> minStudents= new ArrayList<Student>();
+		
+		//Variables
+		int temp=0, limiter= 0;
+		
+		//Stores in first line
+		String lineOne= "Top 3 Earliest to Enroll in "+className;
+		
+		//Store first line to print
+		toPrint.add(lineOne);
+		
+		//Get int values for dates and store into array with corresponding index
+		for(int i=0; i<list.size(); i++){
+			
+			//generate value for comparison
+			temp= (list.get(i).year*100000)+(list.get(i).month*1000)+(list.get(i).day*10)+(i);
+			
+			//Add value to array
+			dateInt.add(temp);
+			
+		}
+		
+		//Sort array by those numbers
+		Collections.sort(dateInt);
+		
+		//Find limiting value
+		if(list.size()>2)
+			limiter=3;
+		
+		//If the prior case is not correct do this
+		else
+			limiter= list.size();
+		
+		//Store smallest 3 into minStudents2
+		for(int j=0; j<limiter; j++){
+			
+			//Get value of location where value comes from
+			temp=dateInt.get(j)%10;
+			
+			//Stores student into array for printing
+			minStudents.add(list.get(temp));
+			
+		}
+		
+		//Store Values to Array for returning and printing
+		for(int k=0; k<limiter; k++){
+			
+			//Add blank line to return array
+			lineOne= " ";
+			toPrint.add(lineOne);
+			
+			//Stores name and last name to return array
+			lineOne= minStudents.get(k).firstName + " " + 
+					minStudents.get(k).lastName;
+			toPrint.add(lineOne);
+			
+			//Stores date into array for return
+			lineOne= Integer.toString(minStudents.get(k).month)+"/"+
+					Integer.toString(minStudents.get(k).day)+"/"+
+					Integer.toString(minStudents.get(k).year);
+			toPrint.add(lineOne);
+			
+			//Stores vids into array for return
+			lineOne= Integer.toString(minStudents.get(k).vids);
+			toPrint.add(lineOne);
+			
+			//Stores time into array for return
+			lineOne= Integer.toString(minStudents.get(k).time);
+			toPrint.add(lineOne);
+			
+		}
+		
+		//Return
+		return(toPrint);
+	
+}
+
+	//Latest registration dates function
+	public static ArrayList<String> datesLatest(ArrayList<Student> list, String className){
+		
+		//Setup array for returning
+		ArrayList<String> toPrint= new ArrayList<String>();
+		ArrayList<Integer> dateInt= new ArrayList<Integer>();
+		ArrayList<Student> maxStudents= new ArrayList<Student>();
+		
+		//Variables
+		int temp=0, limiter= 0, location=0, dateIntSize= 0;
+		
+		//Stores in first line
+		String lineOne= "Top 3 Latest to Enroll in "+className;
+		
+		//Store first line to print
+		toPrint.add(lineOne);
+		
+		//Get int values for dates and store into array with corresponding index
+		for(int i=0; i<list.size(); i++){
+			
+			//generate value for comparison
+			temp= (list.get(i).year*100000)+(list.get(i).month*1000)+(list.get(i).day*10)+(i);
+			
+			//Add value to array
+			dateInt.add(temp);
+			
+		}
+		
+		//Sort array by those numbers
+		Collections.sort(dateInt);
+		
+		System.out.println(dateInt.get(0)+" "+dateInt.get(1)+" "+dateInt.get(2)+" "+dateInt.get(3));
+		
+		//Find limiting value
+		if(list.size()>2)
+			limiter=3;
+		
+		//If the prior case is not correct do this
+		else
+			limiter= list.size();
+		
+		//Store smallest 3 into minStudents2
+		for(int j=1; j<=limiter; j++){
+			
+			//Stores student into array for printing
+			maxStudents.add(list.get(dateInt.get(dateInt.size()-j)%10));
+			
+		}
+		
+		//Store Values to Array for returning and printing
+		for(int k=0; k<limiter; k++){
+			
+			//Add blank line to return array
+			lineOne= " ";
+			toPrint.add(lineOne);
+			
+			//Stores name and last name to return array
+			lineOne= maxStudents.get(k).firstName + " " + 
+					maxStudents.get(k).lastName;
+			toPrint.add(lineOne);
+			
+			//Stores date into array for return
+			lineOne= Integer.toString(maxStudents.get(k).month)+"/"+
+					Integer.toString(maxStudents.get(k).day)+"/"+
+					Integer.toString(maxStudents.get(k).year);
+			toPrint.add(lineOne);
+			
+			//Stores vids into array for return
+			lineOne= Integer.toString(maxStudents.get(k).vids);
+			toPrint.add(lineOne);
+			
+			//Stores time into array for return
+			lineOne= Integer.toString(maxStudents.get(k).time);
+			toPrint.add(lineOne);
+			
+		}
+		
+		//Return
+		return(toPrint);
+		
+	}
+	
+	//Least time spent online function
+	public static ArrayList<String> timeLeast(ArrayList<Student> list, String className){
+		
+		//Setup array for returning
+		ArrayList<String> toPrint= new ArrayList<String>();
+		ArrayList<Integer> timeInt= new ArrayList<Integer>();
+		ArrayList<Student> minStudents= new ArrayList<Student>();
+		
+		//Variables
+		int temp=0, limiter= 0;
+		
+		//Stores in first line
+		String lineOne= "Top 3 Least time spent online in "+className;
+		
+		//Store first line to print
+		toPrint.add(lineOne);
+		
+		//Get int values for dates and store into array with corresponding index
+		for(int i=0; i<list.size(); i++){
+			
+			//generate value for comparison
+			temp= (list.get(i).time*100)+(i);
+			
+			//Add value to array
+			timeInt.add(temp);
+			
+		}
+		
+		//Sort array by those numbers
+		Collections.sort(timeInt);
+		
+		//Find limiting value
+		if(list.size()>2)
+			limiter=3;
+		
+		//If the prior case is not correct do this
+		else
+			limiter= list.size();
+		
+		//Store smallest 3 into minStudents2
+		for(int j=0; j<limiter; j++){
+			
+			//Get value of location where value comes from
+			temp=timeInt.get(j)%100;
+			
+			//Stores student into array for printing
+			minStudents.add(list.get(temp));
+			
+		}
+		
+		//Store Values to Array for returning and printing
+		for(int k=0; k<limiter; k++){
+			
+			//Add blank line to return array
+			lineOne= " ";
+			toPrint.add(lineOne);
+			
+			//Stores name and last name to return array
+			lineOne= minStudents.get(k).firstName + " " + 
+					minStudents.get(k).lastName;
+			toPrint.add(lineOne);
+			
+			//Stores date into array for return
+			lineOne= Integer.toString(minStudents.get(k).month)+"/"+
+					Integer.toString(minStudents.get(k).day)+"/"+
+					Integer.toString(minStudents.get(k).year);
+			toPrint.add(lineOne);
+			
+			//Stores vids into array for return
+			lineOne= Integer.toString(minStudents.get(k).vids);
+			toPrint.add(lineOne);
+			
+			//Stores time into array for return
+			lineOne= Integer.toString(minStudents.get(k).time);
+			toPrint.add(lineOne);
+			
+		}
+		
+		//Return
+		return(toPrint);
+		
+	}
+	
+	//Most time spent function
+	public static ArrayList<String> timeMost(ArrayList<Student> list, String className){
+		
+		//Setup array for returning
+		ArrayList<String> toPrint= new ArrayList<String>();
+		ArrayList<Student> maxStudents= new ArrayList<Student>();
+		ArrayList<Student> maxStudents2= new ArrayList<Student>();
+		
+		//Variables
+		int max=-100, maxIndex=100;
+		
+		String lineOne= "Top 3 Most Time Spent Online in "+className+"\n";
+		
+		//Store first line to print
+		toPrint.add(lineOne);
+		
+		//Go through 3 times, to get 3 values
+		for(int i=0; i<3; i++){
+			
+			//Go through list and find max value
+			for(int j=0; j<list.size();j++){
+				
+				//If current value is larger than largest store it
+				if(max<list.get(j).time){
+					
+					//Store max value for reference
+					max=list.get(j).time;
+					
+					//Store location of max value
+					maxIndex=j;
+				}
+			}
+			
+			//Add greatest value to new arrayList
+			maxStudents.add(list.get(maxIndex));
+			
+			//Removes the added value from original list
+			list.remove(maxIndex);
+			
+		}
+		
+		//Sort
+		//If first entry is largest
+		if(list.get(0).time>list.get(1).time && list.get(0).time>list.get(2).time){
+			
+			//Adds first element to arrayList
+			maxStudents2.add(list.get(0));
+			
+			//Checks for the remaining 2 which is greater and stores them
+			if(list.get(1).time>list.get(2).time){
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(1));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(2));
+				
+			}
+			
+			//If the prior scenario is wrong stores them in order
+			else{
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(2));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(1));
+				
+			}
+				
+			
+		}
+		
+		//If the second entry is largest
+		else if(list.get(1).time>list.get(0).time && list.get(1).time>list.get(2).time){
+			
+			//Adds first element to arrayList
+			maxStudents2.add(list.get(1));
+			
+			//Checks for the remaining 2 which is greater and stores them
+			if(list.get(0).time>list.get(2).time){
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(0));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(2));
+				
+			}
+			
+			//If the prior scenario is wrong stores them in order
+			else{
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(2));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(0));
+				
+			}
+			
+		}
+		
+		//If the third is largest
+		else{
+			
+			//Adds first element to arrayList
+			maxStudents2.add(list.get(2));
+			
+			//Checks for the remaining 2 which is greater and stores them
+			if(list.get(0).time>list.get(1).time){
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(0));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(1));
+				
+			}
+			
+			//If the prior scenario is wrong stores them in order
+			else{
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(1));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(0));
+				
+			}
+			
+		}
+		
+		//Store Values to Array for returning and printing
+		for(int k=0; k<3; k++){
+			
+			//Add blank line to return array
+			lineOne= " ";
+			toPrint.add(lineOne);
+			
+			//Stores name and last name to return array
+			lineOne= maxStudents2.get(k).firstName + " " + 
+					maxStudents2.get(k).lastName;
+			toPrint.add(lineOne);
+			
+			//Stores date into array for return
+			lineOne= Integer.toString(maxStudents2.get(k).month)+"/"+
+					Integer.toString(maxStudents2.get(k).day)+"/"+
+					Integer.toString(maxStudents2.get(k).year);
+			toPrint.add(lineOne);
+			
+			//Stores vids into array for return
+			lineOne= Integer.toString(maxStudents2.get(k).time);
+			toPrint.add(lineOne);
+			
+			//Stores time into array for return
+			lineOne= Integer.toString(maxStudents2.get(k).vids);
+			toPrint.add(lineOne);
+			
+		}
+		
+		//Return
+		return(toPrint);
+		
+	}
+	
+	//Least videos watched function
+	public static ArrayList<String> videoLeast(ArrayList<Student> list, String className){
+		
+		//Setup array for returning
+		ArrayList<String> toPrint= new ArrayList<String>();
+		ArrayList<Student> minStudents= new ArrayList<Student>();
+		ArrayList<Student> minStudents2= new ArrayList<Student>();
+		
+		//Variables
+		int min=1000, minIndex=-100;
+		
+		String lineOne= "Top 3 Least Watched Videos in "+className+"\n";
+		
+		//Store first line to print
+		toPrint.add(lineOne);
+		
+		//Go through 3 times, to get 3 values
+		for(int i=0; i<3; i++){
+			
+			//Go through list and find max value
+			for(int j=0; j<list.size();j++){
+				
+				//If current value is larger than largest store it
+				if(min>list.get(j).vids){
+					
+					//Store max value for reference
+					min=list.get(j).vids;
+					
+					//Store location of max value
+					minIndex=j;
+				}
+			}
+			
+			//Add greatest value to new arrayList
+			minStudents.add(list.get(minIndex));
+			
+			//Removes the added value from original list
+			list.remove(minIndex);
+			
+		}
+		
+		//Sort
+		//If first entry is largest
+		if(list.get(0).vids<list.get(1).vids && list.get(0).vids<list.get(2).vids){
+			
+			//Adds first element to arrayList
+			minStudents2.add(list.get(0));
+			
+			//Checks for the remaining 2 which is greater and stores them
+			if(list.get(1).vids<list.get(2).vids){
+				
+				//Adds second entry to arrayList
+				minStudents2.add(list.get(1));
+				
+				//Adds third entry to arrayList
+				minStudents2.add(list.get(2));
+				
+			}
+			
+			//If the prior scenario is wrong stores them in order
+			else{
+				
+				//Adds second entry to arrayList
+				minStudents2.add(list.get(2));
+				
+				//Adds third entry to arrayList
+				minStudents2.add(list.get(1));
+				
+			}
+				
+			
+		}
+		
+		//If the second entry is largest
+		else if(list.get(1).vids<list.get(0).vids && list.get(1).vids<list.get(2).vids){
+			
+			//Adds first element to arrayList
+			minStudents2.add(list.get(1));
+			
+			//Checks for the remaining 2 which is greater and stores them
+			if(list.get(0).vids<list.get(2).vids){
+				
+				//Adds second entry to arrayList
+				minStudents2.add(list.get(0));
+				
+				//Adds third entry to arrayList
+				minStudents2.add(list.get(2));
+				
+			}
+			
+			//If the prior scenario is wrong stores them in order
+			else{
+				
+				//Adds second entry to arrayList
+				minStudents2.add(list.get(2));
+				
+				//Adds third entry to arrayList
+				minStudents2.add(list.get(0));
+				
+			}
+			
+		}
+		
+		//If the third is largest
+		else{
+			
+			//Adds first element to arrayList
+			minStudents2.add(list.get(2));
+			
+			//Checks for the remaining 2 which is greater and stores them
+			if(list.get(0).vids<list.get(1).vids){
+				
+				//Adds second entry to arrayList
+				minStudents2.add(list.get(0));
+				
+				//Adds third entry to arrayList
+				minStudents2.add(list.get(1));
+				
+			}
+			
+			//If the prior scenario is wrong stores them in order
+			else{
+				
+				//Adds second entry to arrayList
+				minStudents2.add(list.get(1));
+				
+				//Adds third entry to arrayList
+				minStudents2.add(list.get(0));
+				
+			}
+			
+		}
+		
+		//Store Values to Array for returning and printing
+		for(int k=0; k<3; k++){
+			
+			//Add blank line to return array
+			lineOne= " ";
+			toPrint.add(lineOne);
+			
+			//Stores name and last name to return array
+			lineOne= minStudents2.get(k).firstName + " " + 
+					minStudents2.get(k).lastName;
+			toPrint.add(lineOne);
+			
+			//Stores date into array for return
+			lineOne= Integer.toString(minStudents2.get(k).month)+"/"+
+					Integer.toString(minStudents2.get(k).day)+"/"+
+					Integer.toString(minStudents2.get(k).year);
+			toPrint.add(lineOne);
+			
+			//Stores vids into array for return
+			lineOne= Integer.toString(minStudents2.get(k).vids);
+			toPrint.add(lineOne);
+			
+			//Stores time into array for return
+			lineOne= Integer.toString(minStudents2.get(k).time);
+			toPrint.add(lineOne);
+			
+		}
+		
+		//Return
+		return(toPrint);
+		
+	}
+	
+	//Most videos watched function
+	public static ArrayList<String> videoMost(ArrayList<Student> list, String className){
+		
+		//Setup array for returning
+		ArrayList<String> toPrint= new ArrayList<String>();
+		ArrayList<Student> maxStudents= new ArrayList<Student>();
+		ArrayList<Student> maxStudents2= new ArrayList<Student>();
+		
+		//Variables
+		int max=-100, maxIndex=100;
+		
+		String lineOne= "Top 3 Most Watched Videos in "+className+"\n";
+		
+		//Store first line to print
+		toPrint.add(lineOne);
+		
+		//Go through 3 times, to get 3 values
+		for(int i=0; i<3; i++){
+			
+			//Go through list and find max value
+			for(int j=0; j<list.size();j++){
+				
+				//If current value is larger than largest store it
+				if(max<list.get(j).vids){
+					
+					//Store max value for reference
+					max=list.get(j).vids;
+					
+					//Store location of max value
+					maxIndex=j;
+				}
+			}
+			
+			//Add greatest value to new arrayList
+			maxStudents.add(list.get(maxIndex));
+			
+			//Removes the added value from original list
+			list.remove(maxIndex);
+			
+		}
+		
+		//Sort
+		//If first entry is largest
+		if(list.get(0).vids>list.get(1).vids && list.get(0).vids>list.get(2).vids){
+			
+			//Adds first element to arrayList
+			maxStudents2.add(list.get(0));
+			
+			//Checks for the remaining 2 which is greater and stores them
+			if(list.get(1).vids>list.get(2).vids){
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(1));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(2));
+				
+			}
+			
+			//If the prior scenario is wrong stores them in order
+			else{
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(2));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(1));
+				
+			}
+				
+			
+		}
+		
+		//If the second entry is largest
+		else if(list.get(1).vids>list.get(0).vids && list.get(1).vids>list.get(2).vids){
+			
+			//Adds first element to arrayList
+			maxStudents2.add(list.get(1));
+			
+			//Checks for the remaining 2 which is greater and stores them
+			if(list.get(0).vids>list.get(2).vids){
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(0));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(2));
+				
+			}
+			
+			//If the prior scenario is wrong stores them in order
+			else{
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(2));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(0));
+				
+			}
+			
+		}
+		
+		//If the third is largest
+		else{
+			
+			//Adds first element to arrayList
+			maxStudents2.add(list.get(2));
+			
+			//Checks for the remaining 2 which is greater and stores them
+			if(list.get(0).vids>list.get(1).vids){
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(0));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(1));
+				
+			}
+			
+			//If the prior scenario is wrong stores them in order
+			else{
+				
+				//Adds second entry to arrayList
+				maxStudents2.add(list.get(1));
+				
+				//Adds third entry to arrayList
+				maxStudents2.add(list.get(0));
+				
+			}
+			
+		}
+		
+		//Store Values to Array for returning and printing
+		for(int k=0; k<3; k++){
+			
+			//Add blank line to return array
+			lineOne= " ";
+			toPrint.add(lineOne);
+			
+			//Stores name and last name to return array
+			lineOne= maxStudents2.get(k).firstName + " " + 
+					maxStudents2.get(k).lastName;
+			toPrint.add(lineOne);
+			
+			//Stores date into array for return
+			lineOne= Integer.toString(maxStudents2.get(k).month)+"/"+
+					Integer.toString(maxStudents2.get(k).day)+"/"+
+					Integer.toString(maxStudents2.get(k).year);
+			toPrint.add(lineOne);
+			
+			//Stores vids into array for return
+			lineOne= Integer.toString(maxStudents2.get(k).vids);
+			toPrint.add(lineOne);
+			
+			//Stores time into array for return
+			lineOne= Integer.toString(maxStudents2.get(k).time);
+			toPrint.add(lineOne);
+			
+		}
+		
+		//Return
+		return(toPrint);
+		
+	}
+
+	//Main Function
+	public static void main(String[] args) throws IOException{
+	
+		//Variables
+		int numEntries = 0, courseTime = 0, vidsWatched = 0;
+		int tracker = 0, courseSelected= 0, sortSelect=0, howOut=0;
+		String courseName= null, name= null, date= null, str=null;
+	    ArrayList<String> lines = new ArrayList<String>();
+	    ArrayList<String> classes = new ArrayList<String>();
+	    ArrayList<String> toPrint = new ArrayList<String>();
+	    ArrayList<Student> perClass = new ArrayList<Student>();
+	    ArrayList<Student> temporary = new ArrayList<Student>();
+	    ArrayList<ArrayList<Student>> studentClasses = new ArrayList<ArrayList<Student>>();
+	    
+	    //Setup scanner
+	    Scanner userIn = new Scanner(System.in);
+		
+		//Print welcome
+		System.out.println("Welcome to The Student Sorter!");
+		
+		//Checks the file for being there before moving on, otherwise kills program
+		try {
+			new FileReader("input.txt");
+		} catch (FileNotFoundException fnfe) {
+			System.out.println("File not found, check and run program again.");
+			System.exit(0);
+		}
+		
+		//Setup bufferedReader
+		BufferedReader inFile = new BufferedReader(new FileReader("input.txt"));
+		
+	    //Runs through the whole file reading in
+	    while((str = inFile.readLine()) != null){
+	        
+	    	//Adds the string to the line
+	    	lines.add(str);
+	    
+	    }
+	    
+	    //Close file
+	    inFile.close();
+	    
+	    //Moves the list into an array
+	    String[] linesArray = lines.toArray(new String[lines.size()]);
+	    
+		//Read in number of entries
+		numEntries= Integer.parseInt(linesArray[tracker]);
+		
+		//Move the tracker along
+		tracker++;
+
+		//Read through the different entries
+		for(int i=0; i<numEntries; i++){
+			
+			//Move Tracker along
+			tracker++;
+			
+			//Read in name of course
+			courseName= linesArray[tracker];
+			
+			//Stores name of course into courses array
+			classes.add(courseName);
+			
+			//Move the tracker along
+			tracker++;
+			
+			//Find the end of the class students
+			while(((tracker<(linesArray.length)) && !linesArray[tracker+2].isEmpty())){
+				
+				//Move tracker along
+				tracker++;
+				
+				//Read in name
+				name= linesArray[tracker];
+				
+				//Move the tracker along
+				tracker++;
+						
+				//Read in date
+				date= linesArray[tracker];	
+				
+				//Move the tracker along
+				tracker++;
+				
+				//Read in time spent in course
+				courseTime= Integer.parseInt(linesArray[tracker]);
+				
+				//Move the tracker along
+				tracker++;
+				
+				//Read in number of vids watched
+				vidsWatched= Integer.parseInt(linesArray[tracker]);	
+				
+				//Move tracker along
+				tracker++;
+				
+				//Create student object for this person
+				Student temp = new Student(name, date, courseTime, vidsWatched);
+				
+				//Add student to student array for the corresponding class
+				perClass.add(temp); 
+				
+			}
+			
+			//Adds array for each class to array of arrays
+			studentClasses.add(perClass);
+			
+		}
+		
+		//Select course
+		System.out.println("\nPlease select the course you would like sorted:");
+			
+		//Print course choices
+		for(int j=0; j<classes.size(); j++){
+			
+			//Prints the course choices
+			System.out.printf("%d) %s\n", j+1, classes.get(j));
+			
+		}
+		
+		//Read in selection, Check for correct selection
+		do{
+			
+			//Prints the selection indicator
+			System.out.printf("Selection: ");
+			
+			//Store value
+			courseSelected= (userIn.nextInt());
+			
+			//Break out if input correct
+			if(courseSelected>=1 && courseSelected<=classes.size())
+				break;
+			
+			//Prints incorrect selection if needed
+			System.out.println("\nIncorrect selection, try again!");
+			
+		//Do this while the correct selection is not selected	
+		}while(courseSelected<1 || courseSelected>classes.size());
+		
+		//Makes the option coincide with its index
+		courseSelected--;
+		
+		//PROBLEM AREA
+		
+		//Store the class to sort into temporary array
+		//for(int j=0; j<studentClasses.get(courseSelected).size();j++){
+		
+		for(int j=0; j<4;j++){
+			
+			//Store values into temporary array
+			temporary.add(studentClasses.get(courseSelected).get(j));
+			System.out.println(temporary.get(j).firstName);
+			
+		}
+		
+		//PROBLEM AREA
+			
+		//Comparisons selection
+		System.out.println("\nPlease select the sort method you would like:");
+		System.out.println("1) Registration Date (Earliest)");
+		System.out.println("2) Registration Date (Latest)");
+		System.out.println("3) Time Spent (Least)");
+		System.out.println("4) Time Spent (Most)");
+		System.out.println("5) Videos Watched (Least)");
+		System.out.println("6) Videos Watched (Most)");
+		
+		//Read in selection, Check for correct selection
+		do{
+			
+			//Prints the selection indicator
+			System.out.printf("Selection: ");
+			
+			//Store value
+			sortSelect= userIn.nextInt();
+			
+			//Break out if input correct
+			if(sortSelect>=1 && sortSelect<=6)
+				break;
+			
+			//Prints incorrect selection if needed
+			System.out.println("\nIncorrect selection, try again!");
+			
+		//Do this while the correct selection is not selected
+		}while(sortSelect<1 || sortSelect>6);
+		
+		//Asks the user for output format
+		System.out.println("\nPlease select the output format:");
+		System.out.println("1) Print to Console");
+		System.out.println("2) Print to file called out.txt");
+		
+		//Read in selection, Check for correct selection
+		do{
+			
+			//Prints the selection indicator
+			System.out.printf("Selection: ");
+			
+			//Store value
+			howOut= userIn.nextInt();
+			
+			//Break out if input correct
+			if(howOut==1 || howOut==2)
+				break;
+			
+			//Prints incorrect selection if needed
+			System.out.println("\nIncorrect selection, try again!");
+			
+		//Do this while the correct selection is not selected
+		}while(howOut!=1 || howOut!=2);
+		
+		//Make comparison and store into array for later printing
+		//Sort for Registration Date (Earliest)
+		if(sortSelect==1)
+			toPrint= datesEarliest(temporary, classes.get(courseSelected));
+			
+		//Sort for Registration Date (Latest)
+		else if(sortSelect==2)
+			toPrint= datesLatest(temporary, classes.get(courseSelected));
+		
+		//Sort for Time Spent (Least)
+		else if(sortSelect==3)
+			toPrint= videoLeast(temporary, classes.get(courseSelected));
+		
+		//Sort for Time Spent (Most)
+		else if(sortSelect==4)
+			toPrint= timeMost(temporary, classes.get(courseSelected));
+		
+		//Sort for Videos Watched (Least)
+		else if(sortSelect==5)
+			toPrint= videoLeast(temporary, classes.get(courseSelected));
+		
+		//Sort for Videos Watched (Most)
+		else if(sortSelect==6)
+			toPrint= videoMost(temporary, classes.get(courseSelected));
+		
+		//Print into correct format
+		//Print to console
+		if(howOut==1){
+			
+			//Print all lines to console
+			for(int i=0;i<toPrint.size();i++){
+				
+				//Print to console line by line
+				System.out.printf("%s\n", toPrint.get(i));
+				
+			}
+			
+		}
+		
+		//Print to file out.txt
+		else if(howOut==2){
+			
+			//Open file
+			File outFile = new File("out.txt");
+			
+			//Setup to print
+			FileWriter fw = new FileWriter(outFile.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			
+			//Print all lines to file
+			for(int i=0;i<toPrint.size();i++){
+				
+				//Print to file line by line
+				bw.write(toPrint.get(i) + "\n");
+				
+			}
+			
+			//Close file
+			bw.close();
+			
+		}
+		
+		//Prints to show end of statement
+		System.out.println("\nSort sucessful!");
+		
+	}//End Main
+
+}
